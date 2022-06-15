@@ -8,11 +8,11 @@ if __name__ == '__main__':
 
     model_root_path = "/home/alex/pretrained-models/yolov3-coco/"
     det = Detector(
-        model_config_path = model_root_path+"yolov3.yolov3.cfg",
+        model_config_path = model_root_path+"yolov3.cfg",
         model_weights_path = model_root_path+"yolov3.weights",
         data_labels_path = model_root_path+"coco.names",
         input_path = "/home/alex/project-videos/demo.mp4",
-
+        show_raw_output=True,
     )
 
     det.run_video()
