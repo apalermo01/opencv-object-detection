@@ -58,10 +58,6 @@ class Detector:
         self.input_size=input_size
         self.conf_threshold=conf_threshold
         self.nms_threshold=nms_threshold
-        # if log_path is None:
-        #     timestamp = dt.now().strftime('%Y%m%d-%H:%M:%S')
-        #     log_path = f"./logs/log_{timestamp}"
-        #     logging.basicConfig(filename=log_path)
 
         # initialization
         self.load_labels()
@@ -122,12 +118,6 @@ class Detector:
                                      crop=False)
         self.net.setInput(blob)
         layer_names = self.net.getLayerNames()
-        #print("layer names = ", layer_names)
-        #print("unconncected out layers: ", self.net.getUnconnectedOutLayers())
-        #assert False
-        #print(cv2.cuda.getCudaEnabledDeviceCount())
-        #assert False
-        
         if self.using_gpu():
             output_layers = [layer_names[i[0] - 1] for i in self.net.getUnconnectedOutLayers()]
         else:
@@ -148,7 +138,6 @@ class Detector:
 
         # for each detection from each output layer, get confidence, class id, bbox params,
         # and ignore weak detections
-
         for out in layer_outputs:
             for detection in out:
                 scores = detection[5:]
@@ -187,8 +176,8 @@ class Detector:
             color = self.colors[out['class_id']]
             bbox = out['bbox']
             x, y, w, h = int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3])
-            print(f"x={x}; y={y}; w={w}; h={h}")
-            cv2.rectangle(frame, (x, y), (w, h), color, 2)
+           # print(f"x={x}; y={y}; w={w}; h={h}")
+            cv2.rectangle(frame, (x, y), (x+w, y+h), color, 2)
             cv2.putText(frame, label, (x-10, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.2, color, 2)
         cv2.imshow('bbox output', frame)
         cv2.waitKey(1)
