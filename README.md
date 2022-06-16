@@ -14,3 +14,5 @@ this is where I got yolov4 tiny: https://github.com/AlexeyAB/darknet/tree/master
 
 
 yolo drone: https://github.com/chuanenlin/drone-net
+
+second drone model: https://github.com/5a7man/D-Drone_v2
